@@ -1,9 +1,11 @@
 package com.grupo38.automatizandoenergia.controller;
 
+import com.grupo38.automatizandoenergia.controller.dto.EnderecoDto;
 import com.grupo38.automatizandoenergia.controller.dto.UsuarioDto;
 import com.grupo38.automatizandoenergia.dominio.Endereco;
 import com.grupo38.automatizandoenergia.dominio.Usuario;
-import com.grupo38.automatizandoenergia.repositorio.RepositorioEndereco;
+import com.grupo38.automatizandoenergia.repositorio.EnderecoRepository;
+import com.grupo38.automatizandoenergia.service.EnderecoService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Validator;
@@ -23,22 +25,22 @@ import java.util.stream.Collectors;
 @RequestMapping("/endereco")
 public class EnderecoController {
     @Autowired
-    private RepositorioEndereco repositorioEndereco;
+    private EnderecoService enderecoService;
     @Autowired
     private Validator validator;
     @PostMapping
-    public ResponseEntity createEndereco(@RequestBody UsuarioDto usuarioDto) {
+    public ResponseEntity cadastraEndereco(@RequestBody EnderecoDto enderecoDto) {
 
-        Map<Path, String> violacoesToMap = validar(usuarioDto);
+        Map<Path, String> violacoesToMap = validar(enderecoDto);
         if(!violacoesToMap.isEmpty()) return ResponseEntity.badRequest().body(violacoesToMap);
-        Usuario usuario = usuarioDto.toUsuario();
-        String rua = "13 de maio";
-        String numero = "35b";
-        String bairro = "Liberdade";
-        String cidade = "Desconhecida";
-        String estado = "Bahia";
-        Endereco endereco = new Endereco(rua, numero, bairro, cidade, estado, usuario);
-        repositorioEndereco.salvar(endereco);
+        Endereco endereco = enderecoDto.toEndereco();
+//        String rua = "13 de maio";
+//        String numero = "35b";
+//        String bairro = "Liberdade";
+//        String cidade = "Desconhecida";
+//        String estado = "Bahia";
+//        Endereco endereco = new Endereco(rua, numero, bairro, cidade, estado, usuario);
+        enderecoService.save(endereco);
         return ResponseEntity.status(HttpStatus.CREATED).body(endereco);
     }
     private  <T> Map<Path, String> validar(T dto) {

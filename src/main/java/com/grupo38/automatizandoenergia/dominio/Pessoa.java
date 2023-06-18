@@ -6,9 +6,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
-@EqualsAndHashCode(exclude = {"usuario"})
+@EqualsAndHashCode(of = {"id"})
 public class Pessoa {
+    @Getter
+    private UUID id;
     @Getter
     @JsonProperty
     private String nome;
@@ -27,7 +30,8 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(String nome, String  dataDeNascimento, String sexo, String parentescoComUsuario, Usuario usuario) {
+    public Pessoa(UUID id, String nome, String dataDeNascimento, String sexo, String parentescoComUsuario, Usuario usuario) {
+        this.id = id;
         this.nome = nome;
         this.dataDeNascimento = dataDeNascimento;
         this.sexo = sexo;
@@ -36,9 +40,22 @@ public class Pessoa {
     }
 
     public Pessoa(String nome, String  dataDeNascimento, String sexo, String parentescoComUsuario) {
+        this.id = UUID.randomUUID();
         this.nome = nome;
         this.dataDeNascimento = dataDeNascimento;
         this.sexo = sexo;
         this.parentescoComUsuario = parentescoComUsuario;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", dataDeNascimento='" + dataDeNascimento + '\'' +
+                ", sexo='" + sexo + '\'' +
+                ", parentescoComUsuario='" + parentescoComUsuario + '\'' +
+                ", usuario=" + usuario +
+                '}';
     }
 }

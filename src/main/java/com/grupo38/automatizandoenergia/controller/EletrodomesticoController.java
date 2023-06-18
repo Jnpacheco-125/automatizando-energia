@@ -2,8 +2,8 @@ package com.grupo38.automatizandoenergia.controller;
 
 import com.grupo38.automatizandoenergia.controller.dto.EletrodomesticoDto;
 import com.grupo38.automatizandoenergia.dominio.Eletrodomestico;
-import com.grupo38.automatizandoenergia.repositorio.RepositorioEletrodomestico;
-import com.grupo38.automatizandoenergia.repositorio.RepositorioPessoa;
+import com.grupo38.automatizandoenergia.repositorio.EletrodomesticoRepository;
+import com.grupo38.automatizandoenergia.service.EletrodomesticoService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Validator;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/eletrodomestico")
 public class EletrodomesticoController {
     @Autowired
-    private RepositorioEletrodomestico repositorioEletrodomestico;
+    private EletrodomesticoService eletrodomesticoService;
     @Autowired
     private Validator validator;
 
@@ -32,7 +32,7 @@ public class EletrodomesticoController {
         Map<Path, String> violacoesToMap = validar(eletrodomesticoDto);
         if(!violacoesToMap.isEmpty()) return ResponseEntity.badRequest().body(violacoesToMap);
         Eletrodomestico eletrodomestico = eletrodomesticoDto.toEletrodomestico();
-        repositorioEletrodomestico.salvar(eletrodomestico);
+        eletrodomesticoService.save(eletrodomestico);
         return ResponseEntity.status(HttpStatus.CREATED).body(eletrodomestico);
     }
     private  <T> Map<Path, String> validar(T dto) {

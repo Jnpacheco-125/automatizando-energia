@@ -1,9 +1,9 @@
 package com.grupo38.automatizandoenergia.controller;
 
 import com.grupo38.automatizandoenergia.controller.dto.PessoaDto;
-import com.grupo38.automatizandoenergia.controller.dto.UsuarioDto;
 import com.grupo38.automatizandoenergia.dominio.Pessoa;
-import com.grupo38.automatizandoenergia.repositorio.RepositorioPessoa;
+import com.grupo38.automatizandoenergia.repositorio.PessoaRepository;
+import com.grupo38.automatizandoenergia.service.PessoaService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Validator;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/pessoas")
 public class PessoaController {
     @Autowired
-    private RepositorioPessoa repositorioPessoa;
+    private PessoaService pessoaService;
     @Autowired
     private Validator validator;
 
@@ -32,7 +32,7 @@ public class PessoaController {
         Map<Path, String> violacoesToMap = validar(pessoaDto);
         if(!violacoesToMap.isEmpty()) return ResponseEntity.badRequest().body(violacoesToMap);
         Pessoa pessoa = pessoaDto.toPessoa();
-        repositorioPessoa.salvar(pessoa);
+        pessoaService.save(pessoa);
         return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
     }
     private  <T> Map<Path, String> validar(T dto) {
