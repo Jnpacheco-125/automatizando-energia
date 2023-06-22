@@ -1,10 +1,7 @@
 package com.grupo38.automatizandoenergia.controller;
 
 import com.grupo38.automatizandoenergia.controller.dto.EnderecoDto;
-import com.grupo38.automatizandoenergia.controller.dto.UsuarioDto;
 import com.grupo38.automatizandoenergia.dominio.Endereco;
-import com.grupo38.automatizandoenergia.dominio.Usuario;
-import com.grupo38.automatizandoenergia.repositorio.EnderecoRepository;
 import com.grupo38.automatizandoenergia.service.EnderecoService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;

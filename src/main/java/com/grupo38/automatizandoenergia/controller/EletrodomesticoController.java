@@ -2,7 +2,6 @@ package com.grupo38.automatizandoenergia.controller;
 
 import com.grupo38.automatizandoenergia.controller.dto.EletrodomesticoDto;
 import com.grupo38.automatizandoenergia.dominio.Eletrodomestico;
-import com.grupo38.automatizandoenergia.repositorio.EletrodomesticoRepository;
 import com.grupo38.automatizandoenergia.service.EletrodomesticoService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;

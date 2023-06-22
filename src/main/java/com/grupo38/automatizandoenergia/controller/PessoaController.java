@@ -2,7 +2,6 @@ package com.grupo38.automatizandoenergia.controller;
 
 import com.grupo38.automatizandoenergia.controller.dto.PessoaDto;
 import com.grupo38.automatizandoenergia.dominio.Pessoa;
-import com.grupo38.automatizandoenergia.repositorio.PessoaRepository;
 import com.grupo38.automatizandoenergia.service.PessoaService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
